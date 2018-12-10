@@ -1,6 +1,7 @@
 package com.aspose.test;
 
 import com.aspose.test.dom.IPerson;
+import com.aspose.test.service.CalculateSalary;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -165,6 +166,22 @@ public class Staff {
         }
 
         return null;
+    }
+
+    public void prepareCalculate(IPerson person){
+        CalculateSalary calculateSalary = new CalculateSalary();
+        Set<IPerson> setPersons = getSub(person);
+        if (setPersons.size() == 0 || hasSalary(setPersons)){
+            calculateSalary.calculate(person, this);
+        }
+        else{
+            for(IPerson p : setPersons){
+                if (getSalary(p).compareTo(BigDecimal.ZERO) > 0)
+                    continue;
+                prepareCalculate(p);
+                calculateSalary.calculate(p, this);
+            }
+        }
     }
 
 }

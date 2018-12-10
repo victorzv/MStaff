@@ -71,7 +71,8 @@ public class Main {
         /*
         * calculate salary M2
         * */
-        PrepareCalculate(M2, staff);
+        staff.prepareCalculate(M2);
+//        PrepareCalculate(M2, staff);
         calculateSalary.calculate(M2, staff);
         System.out.println("Salary " + M2.getName() + " = " + staff.getSalary(M2).doubleValue());
 
@@ -84,7 +85,9 @@ public class Main {
         * for calculate all salary need calculate salary for head element
         * */
         IPerson headIPerson = staff.getHead();
-        PrepareCalculate(headIPerson, staff);
+        staff.flashSalary();
+        staff.prepareCalculate(headIPerson);
+        //PrepareCalculate(headIPerson, staff);
         calculateSalary.calculate(headIPerson, staff);
 
         staff.getAllSalary().entrySet().forEach(
